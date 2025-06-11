@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         move_uploaded_file($_FILES['gambar']['tmp_name'], "img/$gambar");
     }
 
-    $query = "INSERT INTO blog (judul, konten, gambar) VALUES ('$judul', '$konten', '$gambar')";
+    $query = "INSERT INTO blog (judul, desksingkat, konten, gambar) VALUES ('$judul', '$desksingkat', '$konten', '$gambar')";
     mysqli_query($conn, $query);
     header("Location: admin/kelolaBlog.php");
     exit;
@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <form action="" method="post" enctype="multipart/form-data">
     <input type="text" name="judul" placeholder="Judul" required><br>
+    <textarea name="desksingkat" placeholder="desksingkat" required></textarea><br>
     <textarea name="konten" placeholder="Konten" required></textarea><br>
     <input type="file" name="gambar"><br>
     <button type="submit">Tambah</button>
