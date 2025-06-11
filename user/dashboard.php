@@ -81,7 +81,7 @@ $result = mysqli_query($conn, $sql);
         </div>
     </main>
 
-    <footer class="bg-gray-900 text-gray-200 py-8 text-center mt-12">
+    <footer class="fixed bottom-0 left-0 w-full bg-gray-900 text-gray-200 py-8 text-center shadow">
         <div class="text-sm">© <?php echo date('Y'); ?> Wirspot Blog. All rights reserved.</div>
     </footer>
 </body>
