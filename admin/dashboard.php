@@ -13,9 +13,8 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dashboard Admin</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/style.css" />
 </head>
 
 <body class="bg-gray-100">
@@ -34,10 +33,10 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
                 class="text-white py-3 px-6 font-medium hover:bg-gray-700 transition mt-auto mb-4">Logout</a>
         </nav>
         <!-- Main Content -->
-        <main class="flex-1">
+        <main class="flex-1 p-6">
             <!-- Topbar -->
             <div class="flex justify-between items-center bg-white p-4 border-b border-gray-200">
-                <h5 class="text-green-600 font-semibold m-0">Dashboard Admin</h5>
+                <h5 class="text-green-600 font-semibold m-0">Kelola Blog</h5>
                 <span class="text-gray-500">Admin | <?php echo htmlspecialchars($_SESSION['user']); ?></span>
             </div>
             <!-- Content -->
@@ -98,6 +97,8 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
                     <p class="text-gray-600">Gunakan panel di sebelah kiri untuk mengelola sistem.</p>
                 </div>
             </div>
+
+            <div class=""></div>
         </main>
     </div>
 </body>

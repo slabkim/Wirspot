@@ -13,127 +13,77 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Admin Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-    body {
-        background-color: #f8f9fa;
-    }
-
-    .sidebar {
-        background-color: #343a40;
-        height: 100vh;
-        padding-top: 1rem;
-        border-right: 1px solid #dee2e6;
-    }
-
-    .sidebar a {
-        text-decoration: none;
-        color: #ffffff;
-        display: block;
-        padding: 10px 15px;
-        font-weight: 500;
-    }
-
-    .sidebar a:hover {
-        background-color: #495057;
-        color: #fff;
-    }
-
-
-    .topbar {
-        background-color: #ffffff;
-        padding: 15px;
-        border-bottom: 1px solid #dee2e6;
-    }
-
-    .content-container {
-        padding: 30px;
-        margin-top: 30px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        background-color: white;
-        border-radius: 16px;
-        color: black;
-    }
-
-    .table img {
-        object-fit: cover;
-        border-radius: 8px;
-    }
-
-    .btn-green {
-        background-color: #28a745;
-        color: white;
-    }
-
-    .btn-green:hover {
-        background-color: #218838;
-    }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../styles/style.css" />
 </head>
 
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <nav class="col-md-2 d-none d-md-block sidebar">
-                <div class="text-center mb-4">
-                    <img src="../img/wirspot.png" alt="Logo" class="img-fluid" style="max-height: 100px;">
-                </div>
-                <a href="dashboard.php">Dashboard</a>
-                <a href="kelolaPengguna.php">Kelola Pengguna</a>
-                <a href="kelolaBlog.php">Kelola Blog</a>
-                <a href="../logout.php">Logout</a>
-            </nav>
+<body class="bg-gray-100">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <nav class="w-1/5 min-w-[200px] bg-gray-800 border-r border-gray-200 flex flex-col pt-4">
+            <div class="flex justify-center mb-6">
+                <img src="../img/wirspot.png" alt="Logo" class="max-h-24 object-contain" />
+            </div>
+            <a href="dashboard.php" class="text-white py-3 px-6 font-medium hover:bg-gray-700 transition">Dashboard</a>
+            <a href="kelolaPengguna.php" class="text-white py-3 px-6 font-medium hover:bg-gray-700 transition">Kelola
+                Pengguna</a>
+            <a href="kelolaBlog.php" class="text-white py-3 px-6 font-medium hover:bg-gray-700 transition">Kelola
+                Blog</a>
+            <a href="../logout.php"
+                class="text-white py-3 px-6 font-medium hover:bg-gray-700 transition mt-auto mb-4">Logout</a>
+        </nav>
 
-            <!-- Main Content -->
-            <main class="col-md-10 ms-sm-auto">
-                <div class="topbar d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0 text-success">Kelola Pengguna</h5>
-                    <span class="text-muted">Admin | <?php echo htmlspecialchars($_SESSION['user']); ?></span>
-                </div>
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            <div class="flex justify-between items-center bg-white p-4 border-b border-gray-200">
+                <h5 class="text-green-600 font-semibold m-0">Kelola Pengguna</h5>
+                <span class="text-gray-500">Admin | <?php echo htmlspecialchars($_SESSION['user']); ?></span>
+            </div>
 
-                <div class="content-container">
-                    <h2 class="mb-4">Data Mahasiswa</h2>
-                    <a href="../tambah.php" class="btn btn-green mb-3">+ Tambah Mahasiswa</a>
+            <div class="mt-6 bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-2xl font-semibold mb-4">Data Mahasiswa</h2>
+                <a href="../tambah.php"
+                    class="inline-block bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded mb-4 transition">+
+                    Tambah Mahasiswa</a>
 
-                    <div class="table-responsive rounded-4 overflow-hidden shadow-sm">
-                        <table class="table table-bordered table-hover">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>No</th>
-                                    <th>Username</th>
-                                    <th>Role</th>
-                                    <th>Gambar</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                $result = mysqli_query($conn, "SELECT * FROM users");
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "<tr>
-                                            <td>{$no}</td>
-                                            <td>{$row['username']}</td>
-                                            <td>{$row['role']}</td>
-                                            <td><img src='../img/{$row['gambar']}' alt='Gambar' width='100' height='100'></td>
-                                            <td>
-                                                <a href='../edit.php?id={$row['id']}' class='btn btn-warning btn-sm'>Edit</a>
-                                                <a href='../hapus.php?id={$row['id']}' class='btn btn-danger btn-sm' onclick='return confirm(\"Hapus data ini?\")'>Hapus</a>
-                                            </td>
-                                        </tr>";
-                                    $no++;
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="overflow-x-auto rounded-xl shadow-sm">
+                    <table class="min-w-full border border-gray-300">
+                        <thead class="bg-gray-800 text-white">
+                            <tr>
+                                <th class="py-2 px-4 border border-gray-600 text-left">No</th>
+                                <th class="py-2 px-4 border border-gray-600 text-left">Username</th>
+                                <th class="py-2 px-4 border border-gray-600 text-left">Role</th>
+                                <th class="py-2 px-4 border border-gray-600 text-left">Gambar</th>
+                                <th class="py-2 px-4 border border-gray-600 text-left">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $no = 1;
+                            $result = mysqli_query($conn, "SELECT * FROM users");
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<tr class='hover:bg-gray-100'>
+                                        <td class='py-2 px-4 border border-gray-300'>{$no}</td>
+                                        <td class='py-2 px-4 border border-gray-300'>{$row['username']}</td>
+                                        <td class='py-2 px-4 border border-gray-300'>{$row['role']}</td>
+                                        <td class='py-2 px-4 border border-gray-300'>
+                                            <img src='../img/{$row['gambar']}' alt='Gambar' class='w-24 h-24 object-cover rounded-md' />
+                                        </td>
+                                        <td class='py-2 px-4 border border-gray-300 space-x-2'>
+                                            <a href='../edit.php?id={$row['id']}' class='bg-yellow-400 hover:bg-yellow-500 text-white text-sm font-semibold py-1 px-3 rounded transition'>Edit</a>
+                                            <a href='../hapus.php?id={$row['id']}' onclick='return confirm(\"Hapus data ini?\")' class='bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-1 px-3 rounded transition'>Hapus</a>
+                                        </td>
+                                    </tr>";
+                                $no++;
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
-            </main>
-        </div>
+            </div>
+        </main>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
+>>>>>>>
