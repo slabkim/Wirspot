@@ -7,5 +7,5 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
 include "koneksi/db.php"; 
 $id = $_GET['id']; 
 mysqli_query($conn, "DELETE FROM users WHERE id=$id"); 
-header("Location: dashboard.php"); 
+header("Location: ../admin/kelolaPengguna.php"); 
 ?>

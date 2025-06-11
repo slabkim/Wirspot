@@ -54,7 +54,7 @@ $result = mysqli_query($conn, $sql);
 
     <!-- Banner -->
     <div class="w-full flex flex-col justify-center items-center text-center relative"
-        style="background-image: url('https://www.unila.ac.id/wp-content/uploads/2023/09/WhatsApp-Image-2023-09-14-at-19.32.04-1536x1152.jpeg'); background-size: cover; background-position: center;">
+        style="background-image: url('https://www.unila.ac.id/wp-content/uploads/2023/09/WhatsApp-Image-2023-09-14-at-19.32.04-1536x1152.jpeg'); background-size: cover; background-position: center; height: 70vh;">
         <div class="absolute inset-0 bg-black bg-opacity-50"></div>
         <div class="relative z-10 py-28">
             <h4 class="text-2xl md:text-3xl text-white font-semibold mb-2 drop-shadow">Selamat Datang di Wirspot</h4>
