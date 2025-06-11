@@ -12,6 +12,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dashboard Admin</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="style.css" rel="stylesheet" />
     <style>
@@ -48,6 +49,10 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
     .content {
         padding: 20px;
     }
+
+    .stat-card {
+        min-height: 120px;
+    }
     </style>
 </head>
 
@@ -73,28 +78,61 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
                 </div>
 
                 <div class="content">
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <div class="card border-success">
-                                <div class="card-body">
-                                    <h5 class="card-title text-success">Total Blog</h5>
-                                    <p class="card-text fs-4">120</p>
+                    <!-- Statistik Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-3 mb-3">
+                            <div class="card border-success stat-card shadow-sm">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="mb-1 text-muted">Total Users</p>
+                                        <h4 class="mb-0">1,234</h4>
+                                        <p class="text-success small mb-0">+12% from last month</p>
+                                    </div>
+                                    <div class="bg-success bg-opacity-10 rounded-circle p-3">
+                                        <i class="fas fa-users text-success fs-3"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="card border-success">
-                                <div class="card-body">
-                                    <h5 class="card-title text-success">Total Pengguna</h5>
-                                    <p class="card-text fs-4">8</p>
+                        <div class="col-md-3 mb-3">
+                            <div class="card border-primary stat-card shadow-sm">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="mb-1 text-muted">Total Articles</p>
+                                        <h4 class="mb-0">305</h4>
+                                        <p class="text-success small mb-0">+5% from last month</p>
+                                    </div>
+                                    <div class="bg-primary bg-opacity-10 rounded-circle p-3">
+                                        <i class="fas fa-file-alt text-primary fs-3"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="card border-success">
-                                <div class="card-body">
-                                    <h5 class="card-title text-success">Total Komentar</h5>
-                                    <p class="card-text fs-4">15</p>
+                        <div class="col-md-3 mb-3">
+                            <div class="card border-warning stat-card shadow-sm">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="mb-1 text-muted">Total Views</p>
+                                        <h4 class="mb-0">7,830</h4>
+                                        <p class="text-success small mb-0">+18% from last month</p>
+                                    </div>
+                                    <div class="bg-warning bg-opacity-10 rounded-circle p-3">
+                                        <i class="fas fa-eye text-warning fs-3"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card border-info stat-card shadow-sm">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="mb-1 text-muted">Published</p>
+                                        <h4 class="mb-0">80</h4>
+                                        <p class="text-success small mb-0">+3% from last month</p>
+                                    </div>
+                                    <div class="bg-info bg-opacity-10 rounded-circle p-3">
+                                        <i class="fas fa-chart-line text-info fs-3"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -107,7 +145,6 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
             </main>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
