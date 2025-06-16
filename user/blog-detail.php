@@ -13,7 +13,7 @@ if (!isset($_GET['id'])) {
 }
 
 $id = intval($_GET['id']);
-$sql = "SELECT * FROM blog WHERE id = $id LIMIT 1";
+$sql = "SELECT * FROM blog WHERE id = $id AND status = 'published' LIMIT 1";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) === 0) {
@@ -32,6 +32,8 @@ $article = mysqli_fetch_assoc($result);
     <title><?php echo htmlspecialchars($article['judul']); ?> - Detail Artikel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../dist/output.css" />
 </head>
 
 <body class="bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen">

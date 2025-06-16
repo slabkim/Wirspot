@@ -15,6 +15,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
     <title>Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../dist/output.css" />
 </head>
 
 <body class="bg-gray-100">
@@ -54,6 +55,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
                                 <th class="py-2 px-4 border border-gray-600 text-left">Judul</th>
                                 <th class="py-2 px-4 border border-gray-600 text-left">Isi (Singkat)</th>
                                 <th class="py-2 px-4 border border-gray-600 text-left">Gambar</th>
+                                <th class="py-2 px-4 border border-gray-600 text-left">Status</th>
                                 <th class="py-2 px-4 border border-gray-600 text-left">Aksi</th>
                             </tr>
                         </thead>
@@ -70,6 +72,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
                                 <td class='py-2 px-4 border border-gray-300'>
                                     <img src='../img/{$row['gambar']}' alt='Gambar' class='w-24 h-20 object-cover rounded-md' />
                                 </td>
+                                <td class='py-2 px-4 border border-gray-300'>{$row['status']}</td>
                                 <td class='py-2 px-4 border border-gray-300 space-x-2'>
                                     <a href='../edit_blog.php?id={$row['id']}' class='bg-yellow-400 hover:bg-yellow-500 text-white text-sm font-semibold py-1 px-3 rounded transition'>Edit</a>
                                     <a href='../hapus_blog.php?id={$row['id']}' onclick='return confirm(\"Hapus blog ini?\")' class='bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-1 px-3 rounded transition'>Hapus</a>
@@ -87,4 +90,3 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
 </body>
 
 </html>
->>>>>>>

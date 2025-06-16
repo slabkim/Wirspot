@@ -5,7 +5,16 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
     exit;
 }
 require_once '../koneksi/db.php';
-$sql = "SELECT * FROM blog ORDER BY created_at DESC LIMIT 12";
+$search = '';
+if (isset($_GET['search'])) {
+    $search = mysqli_real_escape_string($conn, $_GET['search']);
+}
+
+if ($search !== '') {
+    $sql = "SELECT * FROM blog WHERE status = 'published' AND (judul LIKE '%$search%' OR konten LIKE '%$search%') ORDER BY created_at DESC LIMIT 12";
+} else {
+    $sql = "SELECT * FROM blog WHERE status = 'published' ORDER BY created_at DESC LIMIT 12";
+}
 $result = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
@@ -17,6 +26,8 @@ $result = mysqli_query($conn, $sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../dist/output.css" />
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 </head>
@@ -38,8 +49,9 @@ $result = mysqli_query($conn, $sql);
                     <a href="profile.html"
                         class="text-white hover:text-green-400 transition font-medium px-2">Profile</a>
                 </div>
-                <form class="flex" role="search" onsubmit="return false;">
-                    <input type="search" placeholder="Search" aria-label="Search"
+                <form class="flex" role="search" method="GET" action="">
+                    <input type="search" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search"
+                        aria-label="Search"
                         class="rounded-l-md border border-green-400 bg-transparent text-white px-3 py-1 focus:outline-none focus:border-green-300 placeholder-gray-400" />
                     <button type="submit"
                         class="rounded-r-md border border-green-400 bg-green-500 text-gray-900 px-4 py-1 hover:bg-green-400 transition font-semibold">Search</button>
@@ -91,8 +103,8 @@ $result = mysqli_query($conn, $sql);
                             <?php echo htmlspecialchars($row['judul']); ?></h5>
                         <p class="flex-1 text-gray-300 leading-relaxed mb-4">
                             <?php
-                            $desksingkat = strip_tags($row['desksingkat']);
-                            echo htmlspecialchars(mb_strimwidth($desksingkat, 0, 140, "..."));
+                            $isiSingkat = substr(strip_tags($row['konten']), 0, 100) . '...';
+                            echo htmlspecialchars(string: $isiSingkat);
                             ?>
                         </p>
                     </div>

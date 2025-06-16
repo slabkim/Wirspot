@@ -15,6 +15,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
     <title>Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../dist/output.css" />
 </head>
 
 <body class="bg-gray-100">
@@ -86,4 +87,3 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
 </body>
 
 </html>
->>>>>>>
