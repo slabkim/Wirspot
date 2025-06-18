@@ -45,7 +45,7 @@ function formatDate($dateString) {
 
 // Fetch recent articles from blog table
 $recent_articles = [];
-$articleQuery = "SELECT id, judul, desksingkat, created_at, views, status FROM blog ORDER BY created_at DESC LIMIT 5";
+$articleQuery = "SELECT id, judul, konten, created_at, views, status FROM blog ORDER BY created_at DESC LIMIT 5";
 $articleResult = mysqli_query($conn, $articleQuery);
 if ($articleResult) {
     while ($row = mysqli_fetch_assoc($articleResult)) {
