@@ -24,45 +24,16 @@ $result = mysqli_query($conn, $sql);
     <meta charset="UTF-8">
     <title>User Dashboard - Wirspot</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../styles/style.css" />
     <link rel="stylesheet" href="../dist/output.css" />
-    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
 <body class="bg-gradient-to-l from-gray-900 to-gray-800 min-h-screen flex flex-col">
 
     <!-- Navbar -->
-    <nav class="bg-gray-900 shadow-lg">
-        <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-5">
-            <a href="#" class="flex items-center gap-3">
-                <img src="wirspot.png" alt="Logo"
-                    class="w-12 h-12 object-contain rounded-full border-2 border-green-400">
-                <span class="text-white text-2xl font-bold tracking-wide">Wirspot</span>
-            </a>
-            <div class="flex flex-wrap items-center gap-4">
-                <div class="flex gap-2">
-                    <a href="blog.html" class="text-white hover:text-green-400 transition font-medium px-2">Blog</a>
-                    <a href="#" class="text-white hover:text-green-400 transition font-medium px-2">Review</a>
-                    <a href="profile.html"
-                        class="text-white hover:text-green-400 transition font-medium px-2">Profile</a>
-                </div>
-                <form class="flex" role="search" method="GET" action="">
-                    <input type="search" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search"
-                        aria-label="Search"
-                        class="rounded-l-md border border-green-400 bg-transparent text-white px-3 py-1 focus:outline-none focus:border-green-300 placeholder-gray-400" />
-                    <button type="submit"
-                        class="rounded-r-md border border-green-400 bg-green-500 text-gray-900 px-4 py-1 hover:bg-green-400 transition font-semibold">Search</button>
-                </form>
-                <span class="ml-4 text-white font-medium hidden md:inline">Halo,
-                    <?php echo htmlspecialchars($_SESSION['user']); ?></span>
-                <a href="../logout.php"
-                    class="ml-2 px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700 transition font-semibold">Logout</a>
-            </div>
-        </div>
-    </nav>
+    <?php include 'include/navbar.php'; ?>
 
     <!-- Banner -->
     <div class="w-full flex flex-col justify-center items-center text-center relative"
@@ -127,40 +98,7 @@ $result = mysqli_query($conn, $sql);
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8 mt-auto">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-4 gap-6">
-            <div class="flex items-center gap-3 mb-4 md:mb-0">
-                <div class="font-bold text-2xl md:text-3xl tracking-wide">WIRSPOT</div>
-                <div class="flex gap-2">
-                    <a href="#"
-                        class="w-10 h-10 flex items-center justify-center border border-cyan-400 rounded-full text-cyan-400 text-lg hover:bg-cyan-400 hover:text-gray-900 transition"><i
-                            class="bi bi-facebook"></i></a>
-                    <a href="#"
-                        class="w-10 h-10 flex items-center justify-center border border-cyan-400 rounded-full text-cyan-400 text-lg hover:bg-cyan-400 hover:text-gray-900 transition"><i
-                            class="bi bi-twitter"></i></a>
-                    <a href="#"
-                        class="w-10 h-10 flex items-center justify-center border border-cyan-400 rounded-full text-cyan-400 text-lg hover:bg-cyan-400 hover:text-gray-900 transition"><i
-                            class="bi bi-instagram"></i></a>
-                    <a href="#"
-                        class="w-10 h-10 flex items-center justify-center border border-cyan-400 rounded-full text-cyan-400 text-lg hover:bg-cyan-400 hover:text-gray-900 transition"><i
-                            class="bi bi-youtube"></i></a>
-                    <a href="#"
-                        class="w-10 h-10 flex items-center justify-center border border-cyan-400 rounded-full text-cyan-400 text-lg hover:bg-cyan-400 hover:text-gray-900 transition"><i
-                            class="bi bi-rss"></i></a>
-                </div>
-            </div>
-            <div class="text-center text-gray-400 text-sm">
-                <div class="mb-2 space-x-2">
-                    <a href="#" class="hover:underline text-cyan-200">Terms of Use</a>|
-                    <a href="#" class="hover:underline text-cyan-200">Privacy Notice</a>|
-                    <a href="#" class="hover:underline text-cyan-200">Cookie Policy</a>
-                </div>
-                <div>
-                    © 2025 <a href="#" class="hover:underline text-cyan-200">UNILA</a>, LLC. ALL RIGHTS RESERVED
-                </div>
-            </div>
-        </div>
-    </footer>
+    <?php include 'include/footer.php'; ?>
 </body>
 
 </html>

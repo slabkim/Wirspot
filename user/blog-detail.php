@@ -34,30 +34,39 @@ $article = mysqli_fetch_assoc($result);
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../styles/style.css" />
     <link rel="stylesheet" href="../dist/output.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
 
-<body class="bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen">
-    <nav class="bg-white shadow p-4 mb-8">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <a href="dashboard.php" class="text-blue-700 font-bold text-xl">← Kembali ke Dashboard</a>
-            <span class="text-gray-700">Halo, <?php echo htmlspecialchars($_SESSION['user']); ?></span>
-        </div>
-    </nav>
+<body class="bg-gradient-to-l from-gray-900 to-gray-800 min-h-screen flex flex-col">
+    <?php include 'include/navbar.php'; ?>
 
-    <main class="max-w-4xl mx-auto bg-white rounded-xl shadow p-6">
-        <h1 class="text-3xl font-bold text-blue-700 mb-4"><?php echo htmlspecialchars($article['judul']); ?></h1>
-        <div class="text-gray-500 text-sm mb-6">
-            <?php echo date('d M Y H:i', strtotime($article['created_at'])); ?>
-        </div>
-        <?php if (!empty($article['gambar'])): ?>
-        <img src="../img/<?php echo htmlspecialchars($article['gambar']); ?>" alt="Gambar Artikel"
-            class="w-full h-64 object-cover rounded mb-6" />
-        <?php endif; ?>
-        <div class="prose max-w-none text-gray-800">
-            <?php echo $article['konten']; ?>
-        </div>
+    <main class="flex-grow flex items-center justify-center px-4 py-10">
+        <article class="bg-white/95 shadow-2xl rounded-2xl p-8 max-w-3xl w-full border border-gray-200">
+            <div class="flex flex-col gap-2 mb-6">
+                <h1 class="text-4xl font-extrabold text-gray-900 mb-1 leading-tight">
+                    <?php echo htmlspecialchars($article['judul']); ?></h1>
+                <div class="flex items-center gap-2 text-gray-500 text-xs">
+                    <i class="bi bi-calendar2-week"></i>
+                    <span><?php echo date('d M Y H:i', strtotime($article['created_at'])); ?></span>
+                    <!-- Jika ingin menambah penulis, tambahkan di sini -->
+                </div>
+            </div>
+            <?php if (!empty($article['gambar'])): ?>
+            <div
+                class="w-full h-64 overflow-hidden rounded-xl mb-8 border border-gray-200 shadow-sm hover:shadow-md transition">
+                <img src="../img/<?php echo htmlspecialchars($article['gambar']); ?>" alt="Gambar Artikel"
+                    class="w-full h-full object-cover transition duration-300 hover:scale-105" />
+            </div>
+            <?php endif; ?>
+            <div class="prose prose-lg max-w-none text-gray-800 mb-4">
+                <?php echo $article['konten']; ?>
+            </div>
+        </article>
     </main>
+
+    <?php include 'include/footer.php'; ?>
 </body>
+
 
 </html>
 

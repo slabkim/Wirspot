@@ -43,9 +43,22 @@ function formatDate($dateString) {
     return date('d M Y', $timestamp);
 }
 
+// Fetch counts for cards
+$total_users_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM users");
+$total_users_row = mysqli_fetch_assoc($total_users_result);
+$total_users = $total_users_row['total'];
+
+$total_articles_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM blog");
+$total_articles_row = mysqli_fetch_assoc($total_articles_result);
+$total_articles = $total_articles_row['total'];
+
+$total_published_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM blog WHERE status = 'published'");
+$total_published_row = mysqli_fetch_assoc($total_published_result);
+$total_published = $total_published_row['total'];
+
 // Fetch recent articles from blog table
 $recent_articles = [];
-$articleQuery = "SELECT id, judul, konten, created_at, views, status FROM blog ORDER BY created_at DESC LIMIT 5";
+$articleQuery = "SELECT id, judul, konten, created_at, status FROM blog ORDER BY created_at DESC LIMIT 4";
 $articleResult = mysqli_query($conn, $articleQuery);
 if ($articleResult) {
     while ($row = mysqli_fetch_assoc($articleResult)) {
@@ -110,7 +123,7 @@ if ($userResult) {
                         class="bg-white border-l-4 border-green-600 shadow-sm rounded-xl flex items-center p-4 min-h-[120px]">
                         <div class="flex-1">
                             <p class="text-gray-400 text-sm mb-1">Total Users</p>
-                            <h4 class="text-lg font-bold mb-0">1,234</h4>
+                            <h4 class="text-lg font-bold mb-0"><?= number_format($total_users) ?></h4>
                             <p class="text-green-600 text-xs mb-0">+12% from last month</p>
                         </div>
                         <div class="bg-green-100 rounded-full p-3 ml-3">
@@ -122,7 +135,7 @@ if ($userResult) {
                         class="bg-white border-l-4 border-blue-600 shadow-sm rounded-xl flex items-center p-4 min-h-[120px]">
                         <div class="flex-1">
                             <p class="text-gray-400 text-sm mb-1">Total Articles</p>
-                            <h4 class="text-lg font-bold mb-0">305</h4>
+                            <h4 class="text-lg font-bold mb-0"><?= number_format($total_articles) ?></h4>
                             <p class="text-green-600 text-xs mb-0">+5% from last month</p>
                         </div>
                         <div class="bg-blue-100 rounded-full p-3 ml-3">
@@ -130,23 +143,12 @@ if ($userResult) {
                         </div>
                     </div>
                     <!-- Card 3 -->
-                    <div
-                        class="bg-white border-l-4 border-yellow-500 shadow-sm rounded-xl flex items-center p-4 min-h-[120px]">
-                        <div class="flex-1">
-                            <p class="text-gray-400 text-sm mb-1">Total Views</p>
-                            <h4 class="text-lg font-bold mb-0">7,830</h4>
-                            <p class="text-green-600 text-xs mb-0">+18% from last month</p>
-                        </div>
-                        <div class="bg-yellow-100 rounded-full p-3 ml-3">
-                            <i class="fas fa-eye text-yellow-500 text-2xl"></i>
-                        </div>
-                    </div>
                     <!-- Card 4 -->
                     <div
                         class="bg-white border-l-4 border-cyan-500 shadow-sm rounded-xl flex items-center p-4 min-h-[120px]">
                         <div class="flex-1">
                             <p class="text-gray-400 text-sm mb-1">Published</p>
-                            <h4 class="text-lg font-bold mb-0">80</h4>
+                            <h4 class="text-lg font-bold mb-0"><?= number_format($total_published) ?></h4>
                             <p class="text-green-600 text-xs mb-0">+3% from last month</p>
                         </div>
                         <div class="bg-cyan-100 rounded-full p-3 ml-3">
@@ -184,9 +186,6 @@ if ($userResult) {
                                             class="px-2 py-1 text-xs font-medium rounded-full <?php echo getBadgeClass($article['status']); ?>">
                                             <?php echo ucfirst($article['status']); ?>
                                         </span>
-                                        <span
-                                            class="text-sm text-gray-500"><?php echo number_format($article['views']); ?>
-                                            views</span>
                                     </div>
                                 </div>
                                 <?php endforeach; ?>

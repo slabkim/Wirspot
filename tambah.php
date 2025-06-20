@@ -1,11 +1,15 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: ../index.php");
     exit;
 }
 include 'koneksi/db.php';
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (!isset($_SESSION['user'])) {
     header("Location: index.php");
     exit;
@@ -47,50 +51,58 @@ try {
 
 <head>
     <title>Tambah User</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../styles/style.css" />
     <link rel="stylesheet" href="../dist/output.css" />
 </head>
 
-<body class="container mt-5">
-    <h2>Tambah Mahasiswa/User Baru</h2>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center pt-10">
+    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-semibold mb-6 text-center">Tambah Mahasiswa/User Baru</h2>
 
-    <?php if ($duplicateError): ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        Username sudah digunakan. Silakan pilih username lain.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <?php if ($duplicateError): ?>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline">Username sudah digunakan. Silakan pilih username lain.</span>
+        </div>
+        <?php endif; ?>
+
+        <form action="" method="POST" enctype="multipart/form-data" class="space-y-4">
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Username</label>
+                <input type="text" name="username" required
+                    class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500" />
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Password</label>
+                <input type="password" name="password" required
+                    class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500" />
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Upload Gambar (opsional)</label>
+                <input type="file" name="gambar"
+                    class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500" />
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Role</label>
+                <select name="role" required
+                    class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <option value="user" selected>User</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
+            <div class="flex justify-between items-center">
+                <button type="submit"
+                    class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition font-semibold">Tambah</button>
+                <a href="admin/kelolaPengguna.php"
+                    class="text-gray-600 hover:text-gray-900 font-semibold transition underline">Kembali</a>
+            </div>
+        </form>
     </div>
-    <?php endif; ?>
-
-    <form action="" method="POST" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label class="form-label">Username</label>
-            <input type="text" name="username" class="form-control" required>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" required>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Upload Gambar (opsional)</label>
-            <input type="file" name="gambar" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Role</label>
-            <select name="role" class="form-select" required>
-                <option value="user" selected>User</option>
-                <option value="admin">Admin</option>
-            </select>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Tambah</button>
-        <a href="dashboard.php" class="btn btn-secondary">Kembali</a>
-    </form>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
