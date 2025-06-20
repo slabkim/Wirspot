@@ -75,7 +75,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] 
                     $search_sql = "";
                     if ($search !== '') {
                         $search_escaped = mysqli_real_escape_string($conn, $search);
-                        $search_sql = "WHERE judul LIKE '%$search_escaped%' OR konten LIKE '%$search_escaped%'";
+                        $search_sql = "WHERE judul LIKE '%$search_escaped%'";
                     }
 
                     // Get total posts count with search filter

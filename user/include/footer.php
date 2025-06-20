@@ -21,13 +21,9 @@
             </div>
         </div>
         <div class="text-center text-gray-400 text-sm">
-            <div class="mb-2 space-x-2">
-                <a href="#" class="hover:underline text-cyan-200">Terms of Use</a>|
-                <a href="#" class="hover:underline text-cyan-200">Privacy Notice</a>|
-                <a href="#" class="hover:underline text-cyan-200">Cookie Policy</a>
-            </div>
             <div>
-                © 2025 <a href="#" class="hover:underline text-cyan-200">UNILA</a>, LLC. ALL RIGHTS RESERVED
+                © 2025 <a href="https://vclass.unila.ac.id/" target="_blank"
+                    class="hover:underline text-cyan-200">UNILA</a>, LLC. ALL RIGHTS RESERVED
             </div>
         </div>
     </div>

@@ -11,7 +11,7 @@ if (isset($_GET['search'])) {
 }
 
 if ($search !== '') {
-    $sql = "SELECT * FROM blog WHERE status = 'published' AND (judul LIKE '%$search%') ORDER BY created_at DESC LIMIT 12";
+    $sql = "SELECT * FROM blog WHERE status = 'published' AND (judul LIKE '%$search%') ORDER BY created_at DESC LIMIT 6";
 } else {
     $sql = "SELECT * FROM blog WHERE status = 'published' ORDER BY created_at DESC LIMIT 12";
 }
