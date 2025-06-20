@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
     full_name VARCHAR(100) DEFAULT NULL,
     location VARCHAR(100) DEFAULT NULL,
     role ENUM('admin', 'user') NOT NULL DEFAULT 'user',
+    gambar VARCHAR(255) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 

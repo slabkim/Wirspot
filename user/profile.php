@@ -17,30 +17,47 @@ $result = $stmt->get_result();
 $userData = $result->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $full_name = $_POST['full_name'] ?? '';
-    $location = $_POST['location'] ?? '';
-
-    $folder = "../img/";
-
-    if (isset($_FILES['profile_image']) && $_FILES['profile_image']['name'] != "") {
-        $nama_file = $_FILES['profile_image']['name'];
-        $tmp_file = $_FILES['profile_image']['tmp_name'];
-
-        if (move_uploaded_file($tmp_file, $folder . $nama_file)) {
-            $query = "UPDATE users SET full_name = '$full_name', location = '$location', gambar = '$nama_file' WHERE username = '$username'";
-            mysqli_query($conn, $query);
+    if (isset($_POST['delete_account'])) {
+        // Delete user account
+        $delete_sql = "DELETE FROM users WHERE username = ?";
+        $delete_stmt = $conn->prepare($delete_sql);
+        $delete_stmt->bind_param("s", $username);
+        if ($delete_stmt->execute()) {
+            $delete_stmt->close();
+            // Destroy session and redirect to homepage
+            session_unset();
+            session_destroy();
+            header("Location: ../index.php");
+            exit;
         } else {
-            $error_message = "Gagal upload gambar!";
+            $error_message = "Gagal menghapus akun!";
         }
     } else {
-        $query = "UPDATE users SET full_name = '$full_name', location = '$location' WHERE username = '$username'";
-        mysqli_query($conn, $query);
-    }
+        $full_name = $_POST['full_name'] ?? '';
+        $location = $_POST['location'] ?? '';
 
-    // Refresh user data after update
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $userData = $result->fetch_assoc();
+        $folder = "../img/";
+
+        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['name'] != "") {
+            $nama_file = $_FILES['profile_image']['name'];
+            $tmp_file = $_FILES['profile_image']['tmp_name'];
+
+            if (move_uploaded_file($tmp_file, $folder . $nama_file)) {
+                $query = "UPDATE users SET full_name = '$full_name', location = '$location', gambar = '$nama_file' WHERE username = '$username'";
+                mysqli_query($conn, $query);
+            } else {
+                $error_message = "Gagal upload gambar!";
+            }
+        } else {
+            $query = "UPDATE users SET full_name = '$full_name', location = '$location' WHERE username = '$username'";
+            mysqli_query($conn, $query);
+        }
+
+        // Refresh user data after update
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $userData = $result->fetch_assoc();
+    }
 }
 
 $stmt->close();
@@ -96,6 +113,14 @@ $stmt->close();
                 <div class="w-full md:w-1/3 px-4">
                     <a href="../logout.php" class="text-red-600 block hover:underline"><i
                             class="bi bi-box-arrow-right mr-2"></i> Logout</a></li>
+                    <form method="POST"
+                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus akun ini? Semua data akan hilang.')">
+                        <input type="hidden" name="delete_account" value="1" />
+                        <button type="submit"
+                            class="text-red-600 block hover:underline bg-transparent border-none p-0 m-0 cursor-pointer font-normal">
+                            <i class="bi bi-trash3 mr-2"></i> Hapus Akun
+                        </button>
+                    </form>
                     </ul>
                 </div>
             </div>
