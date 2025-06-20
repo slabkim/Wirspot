@@ -201,7 +201,7 @@ if ($userResult) {
                                     <h3 class="text-lg font-medium text-gray-900">Recent Users</h3>
                                     <p class="text-sm text-gray-600">Newly registered users</p>
                                 </div>
-                                <a href="kelolaBlog.php"
+                                <a href="kelolaPengguna.php"
                                     class="border border-gray-300 text-gray-700 px-3 py-1 rounded text-sm hover:bg-gray-50">
                                     View All
                                 </a>
