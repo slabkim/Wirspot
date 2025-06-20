@@ -17,25 +17,26 @@ if (!isset($_SESSION['user'])) {
 $id = $_GET['id']; 
 $data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM users WHERE id=$id"));
 
-if (isset($_POST['update'])) { 
-    $username = $_POST['username']; 
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); 
-    $gambar_lama = $data['gambar'];
+    if (isset($_POST['update'])) { 
+        $username = $_POST['username']; 
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT); 
+        $role = $_POST['role'];
+        $gambar_lama = $data['gambar'];
 
-    if (!empty($_FILES['gambar']['name'])) {
-        $nama_file = $_FILES['gambar']['name'];
-        $tmp_file = $_FILES['gambar']['tmp_name'];
-        $folder = "img/";
-        move_uploaded_file($tmp_file, $folder . $nama_file);
-    } else {
-        $nama_file = $gambar_lama;
+        if (!empty($_FILES['gambar']['name'])) {
+            $nama_file = $_FILES['gambar']['name'];
+            $tmp_file = $_FILES['gambar']['tmp_name'];
+            $folder = "img/";
+            move_uploaded_file($tmp_file, $folder . $nama_file);
+        } else {
+            $nama_file = $gambar_lama;
+        }
+
+        $query = "UPDATE users SET username='$username', password='$password', role='$role', gambar='$nama_file' WHERE id=$id";
+        mysqli_query($conn, $query);
+        echo "<div class='alert alert-success mt-3'>Data berhasil diupdate.</div>"; 
+        $data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM users WHERE id=$id"));
     }
-
-    $query = "UPDATE users SET username='$username', password='$password', gambar='$nama_file' WHERE id=$id";
-    mysqli_query($conn, $query);
-    echo "<div class='alert alert-success mt-3'>Data berhasil diupdate.</div>"; 
-    $data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM users WHERE id=$id"));
-}
 ?>
 
 <!DOCTYPE html>
@@ -72,6 +73,15 @@ if (isset($_POST['update'])) {
                 <label for="password" class="block text-gray-700 font-medium">Password Baru</label>
                 <input type="password" id="password" name="password" required
                     class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500" />
+            </div>
+
+            <div>
+                <label for="role" class="block text-gray-700 font-medium">Role</label>
+                <select id="role" name="role" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <option value="user" <?= $data['role'] === 'user' ? 'selected' : '' ?>>User</option>
+                    <option value="admin" <?= $data['role'] === 'admin' ? 'selected' : '' ?>>Admin</option>
+                </select>
             </div>
 
             <div>

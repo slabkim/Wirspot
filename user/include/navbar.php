@@ -13,7 +13,7 @@
                 <a href="blog.php" class="text-white hover:text-green-400 transition font-medium px-2">Blog</a>
                 <a href="profile.php" class="text-white hover:text-green-400 transition font-medium px-2">Profile</a>
             </div>
-            <form class="flex" role="search" method="GET" action="">
+            <form class="flex" role="search" method="GET" action="dashboard.php">
                 <input type="search" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search"
                     aria-label="Search"
                     class="rounded-l-md border border-green-400 bg-transparent text-white px-3 py-1 focus:outline-none focus:border-green-300 placeholder-gray-400" />
