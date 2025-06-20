@@ -116,8 +116,7 @@ $stmt->close();
                     <form method="POST"
                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus akun ini? Semua data akan hilang.')">
                         <input type="hidden" name="delete_account" value="1" />
-                        <button type="submit"
-                            class="text-red-600 block hover:underline bg-transparent border-none p-0 m-0 cursor-pointer font-normal">
+                        <button type="submit" class="text-red-600 block hover:underline block hover:underline">
                             <i class="bi bi-trash3 mr-2"></i> Hapus Akun
                         </button>
                     </form>
